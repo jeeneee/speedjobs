@@ -7,8 +7,6 @@ import static javax.persistence.CascadeType.ALL;
 
 import com.jobseek.speedjobs.common.exception.ForbiddenException;
 import com.jobseek.speedjobs.domain.BaseTimeEntity;
-import com.jobseek.speedjobs.domain.message.Message;
-import com.jobseek.speedjobs.domain.post.Comment;
 import com.jobseek.speedjobs.domain.post.Post;
 import com.jobseek.speedjobs.domain.recruit.Recruit;
 import java.util.ArrayList;
@@ -23,7 +21,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -59,15 +56,6 @@ public class User extends BaseTimeEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Role role;
-
-	@OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
-	private List<Post> posts;
-
-	@OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
-	private List<Comment> comments;
-
-	@OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
-	private List<Message> messages;
 
 	@ManyToMany(mappedBy = "favorites", cascade = ALL)
 	private final List<Post> postFavorites = new ArrayList<>();

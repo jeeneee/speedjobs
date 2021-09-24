@@ -1,17 +1,12 @@
 package com.jobseek.speedjobs.domain.company;
 
-import static javax.persistence.CascadeType.ALL;
 import static lombok.AccessLevel.PROTECTED;
 
-import com.jobseek.speedjobs.domain.recruit.Recruit;
 import com.jobseek.speedjobs.domain.user.User;
 import com.jobseek.speedjobs.domain.user.UserVisitor;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -25,9 +20,6 @@ import lombok.experimental.SuperBuilder;
 @PrimaryKeyJoinColumn(name = "user_id")
 @Table(name = "companies")
 public class Company extends User {
-
-	@OneToMany(mappedBy = "company", cascade = ALL, orphanRemoval = true)
-	private final List<Recruit> recruits = new ArrayList<>();
 
 	@Column(unique = true)
 	private String companyName;

@@ -1,6 +1,5 @@
 package com.jobseek.speedjobs.domain.tag;
 
-import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.jobseek.speedjobs.common.exception.IllegalParameterException;
@@ -17,7 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @Getter
-@AllArgsConstructor(access = PRIVATE)
 @NoArgsConstructor(access = PROTECTED)
 @Entity
 @Table(name = "tags")

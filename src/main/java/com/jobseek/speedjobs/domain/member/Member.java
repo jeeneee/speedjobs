@@ -1,19 +1,13 @@
 package com.jobseek.speedjobs.domain.member;
 
-import static javax.persistence.CascadeType.ALL;
-
-import com.jobseek.speedjobs.domain.resume.Resume;
 import com.jobseek.speedjobs.domain.user.Provider;
 import com.jobseek.speedjobs.domain.user.User;
 import com.jobseek.speedjobs.domain.user.UserVisitor;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -40,9 +34,6 @@ public class Member extends User {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Provider provider;
-
-	@OneToMany(mappedBy = "member", cascade = ALL, orphanRemoval = true)
-	private final List<Resume> resumes = new ArrayList<>();
 
 	public void updateInfo(Member member) {
 		update(member.getName(), member.getNickname(), member.getPicture(),

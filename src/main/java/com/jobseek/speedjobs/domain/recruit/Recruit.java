@@ -4,7 +4,6 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
-import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.jobseek.speedjobs.common.exception.DuplicatedException;
@@ -12,7 +11,6 @@ import com.jobseek.speedjobs.common.exception.IllegalParameterException;
 import com.jobseek.speedjobs.common.exception.NotFoundException;
 import com.jobseek.speedjobs.domain.BaseTimeEntity;
 import com.jobseek.speedjobs.domain.company.Company;
-import com.jobseek.speedjobs.domain.message.Message;
 import com.jobseek.speedjobs.domain.resume.Apply;
 import com.jobseek.speedjobs.domain.tag.Tag;
 import com.jobseek.speedjobs.domain.user.User;
@@ -33,7 +31,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +40,6 @@ import org.apache.commons.lang3.StringUtils;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor(access = PRIVATE)
 @Table(name = "recruits")
 public class Recruit extends BaseTimeEntity {
 
@@ -74,9 +70,6 @@ public class Recruit extends BaseTimeEntity {
 
 	@OneToMany(mappedBy = "recruit", cascade = ALL, orphanRemoval = true)
 	private List<Apply> applies = new ArrayList<>();
-
-	@OneToMany(cascade = ALL, orphanRemoval = true)
-	private List<Message> messages = new ArrayList<>();
 
 	@ManyToOne(fetch = LAZY, cascade = {PERSIST, MERGE})
 	@JoinColumn(name = "company_id")

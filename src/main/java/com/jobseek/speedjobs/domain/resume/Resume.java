@@ -3,7 +3,6 @@ package com.jobseek.speedjobs.domain.resume;
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
-import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.jobseek.speedjobs.common.exception.IllegalParameterException;
@@ -33,7 +32,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +41,6 @@ import org.apache.commons.lang3.StringUtils;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-@AllArgsConstructor(access = PRIVATE)
 @Table(name = "resumes")
 public class Resume extends BaseTimeEntity {
 
@@ -78,10 +75,6 @@ public class Resume extends BaseTimeEntity {
 
 	private String resumeImage;
 
-	@ManyToOne(fetch = LAZY, cascade = PERSIST)
-	@JoinColumn(name = "member_id")
-	private Member member;
-
 	@ElementCollection
 	@CollectionTable(name = "certificate", joinColumns = @JoinColumn(name = "resume_id"))
 	private List<Certificate> certificates = new ArrayList<>();
@@ -100,6 +93,10 @@ public class Resume extends BaseTimeEntity {
 
 	@OneToMany(mappedBy = "resume", cascade = {PERSIST, MERGE}, orphanRemoval = true)
 	private List<Apply> applies = new ArrayList<>();
+
+	@ManyToOne(fetch = LAZY, cascade = PERSIST)
+	@JoinColumn(name = "member_id")
+	private Member member;
 
 	@Builder
 	private Resume(Long id, Open open, String coverLetter, String title, String name, String gender,
@@ -191,5 +188,4 @@ public class Resume extends BaseTimeEntity {
 		this.tags.clear();
 		addTags(tags);
 	}
-
 }

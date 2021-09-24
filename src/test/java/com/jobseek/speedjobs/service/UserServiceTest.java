@@ -28,7 +28,6 @@ import com.jobseek.speedjobs.dto.user.UserListResponse;
 import com.jobseek.speedjobs.dto.user.UserSaveRequest;
 import com.jobseek.speedjobs.util.RedisUtil;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -94,7 +93,6 @@ class UserServiceTest {
 			.email("member@member.com")
 			.password("memberTest1!")
 			.role(ROLE_GUEST)
-			.comments(new ArrayList<>())
 			.birth(LocalDate.now())
 			.build();
 

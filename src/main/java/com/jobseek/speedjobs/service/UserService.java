@@ -9,8 +9,6 @@ import com.jobseek.speedjobs.domain.company.Company;
 import com.jobseek.speedjobs.domain.company.CompanyRepository;
 import com.jobseek.speedjobs.domain.member.Member;
 import com.jobseek.speedjobs.domain.member.MemberRepository;
-import com.jobseek.speedjobs.domain.post.Comment;
-import com.jobseek.speedjobs.domain.post.Post;
 import com.jobseek.speedjobs.domain.user.User;
 import com.jobseek.speedjobs.domain.user.UserQueryRepository;
 import com.jobseek.speedjobs.domain.user.UserRepository;
@@ -89,7 +87,6 @@ public class UserService {
 	@Transactional
 	public void delete(UserCheckRequest request, Long targetId, User user) {
 		User target = getUser(targetId);
-		target.getComments().stream().map(Comment::getPost).forEach(Post::decreaseCommentCount);
 		if (!user.isAdmin()) {
 			validatePassword(request, target);
 		}

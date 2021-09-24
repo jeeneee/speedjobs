@@ -55,7 +55,7 @@ public class Comment extends BaseTimeEntity {
 		joinColumns = @JoinColumn(name = "comment_id"),
 		inverseJoinColumns = @JoinColumn(name = "user_id")
 	)
-	private final List<User> favorites = new ArrayList<>();
+	private List<User> favorites = new ArrayList<>();
 
 	@Builder
 	private Comment(Long id, String content, Post post, User user) {
