@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ChatService {
 
-	public static final String DESTINATION_PREFIX = "/channel/";
+	public static final String DESTINATION_PREFIX = "/topic/";
 
 	private final MessageRepository messageRepository;
 	private final RecruitService recruitService;

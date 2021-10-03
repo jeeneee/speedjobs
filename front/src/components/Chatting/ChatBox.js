@@ -78,6 +78,10 @@ export default function ChatBox({ chatName, recruitId, ...props }) {
   const [msg, setMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [msgHistory, setMsgHistory] = useState([]);
+  const [accessCookie, ,] = useCookies('ACCESS_TOKEN');
+  const header = {
+    Authorization: 'Bearer '.concat(accessCookie['ACCESS_TOKEN']),
+  };
   const [cookie, ,] = useCookies('REFRESH_TOKEN');
   const { user, recruit } = useSelector((state) => state);
   const sendMessage = useCallback(() => {
@@ -85,7 +89,7 @@ export default function ChatBox({ chatName, recruitId, ...props }) {
       return;
     }
     const sendMsg = { roomId: recruitId, authorId: user.me.id, content: msg };
-    chatRef.current.sendMessage('/send/message', JSON.stringify(sendMsg));
+    chatRef.current.sendMessage('/app/message', JSON.stringify(sendMsg));
     setMsg('');
   }, [chatRef, msg, user.me?.id, recruitId]);
   const dispatch = useDispatch();
@@ -175,9 +179,10 @@ export default function ChatBox({ chatName, recruitId, ...props }) {
       <Container pop={props.pop}>
         <SockJSClient
           url={address() + '/chat'}
-          topics={[`/channel/${recruitId}`]}
+          topics={[`/topic/${recruitId}`]}
           onMessage={getMessage}
           ref={chatRef}
+          headers={header}
         />
         <BackArea>
           <BackButton onClick={() => props.button()} />
